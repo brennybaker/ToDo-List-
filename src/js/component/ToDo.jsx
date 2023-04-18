@@ -1,60 +1,54 @@
 import React, { useState } from "react";
 
-const ToDo = (props) => {
+const ToDo = () => {
   const [input, setInput] = useState("");
   const [listItem, setListItem] = useState([
     "Make the bed",
     "Brush my teeth",
     "Wash my face",
     "Eat breakfast",
-    "Walk the dog",
+    "Walk the dog"
   ]);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const addIt = (e) => {
-    if (e.key === "Enter" && input.trim() !== "") {
-      setListItem((prevItems) => [...prevItems, input.trim()]);
-      setInput("");
-    }
+    e.preventDefault();
+    setListItem([...listItem, input]);
+    setInput("");
   };
 
-  const deleteItem = (index) => {
-    setListItem((prevItems) => prevItems.filter((item, i) => i !== index));
+  const removeIt = (index) => {
+    const newList = [...listItem];
+    newList.splice(index, 1);
+    setListItem(newList);
   };
 
   return (
-    <div className="list">
+    <div className="container">
       <h1>To-Dos</h1>
-      <ul>
-        <li className="oglist">
+      
+        <ul className="list">
+        <form onSubmit={addIt}>
           <input
             type="text"
             placeholder="What needs to be done?"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => addIt(e)}
           />
-        </li>
-      </ul>
-      {listItem.map((item, index) => {
-        return (
-          <ul key={index}>
-            <li
-              className="listitems"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
+          <button type="submit" style={{}}>Add</button>
+        </form>
+          {listItem.map((item, index) => (
+            <li className="listitems" key={index}>
               {item}
-              {hoveredIndex === index && (
-                <button className="delete-button" onClick={() => deleteItem(index)}>
-                  X
-                </button>
-              )}
+              <button className="delete" onClick={() => removeIt(index)}>
+                x
+              </button>
             </li>
-          </ul>
-        );
-      })}
-      <p className="item-count">You have {listItem.length} items on your list.</p>
+          ))}
+          <div className="count">
+            <p>Number of items: {listItem.length}</p>
+          </div>
+        </ul>
+      
     </div>
   );
 };
