@@ -1,12 +1,40 @@
+h1{
+    font-family: 'Dongle', sans-serif;
+    font-size: xxx-large;
+}
 
-/* 
+.list{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    width: 25%;
+    height: 45%;
+    border-radius: 25%;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+input{
+    border: none;
+}
 
-*/
+.oglist{
+    border:1px solid black;
+    list-style-type: none;
+}
+
+.listitems{
+    border:1px solid black;
+    list-style-type: none;
+}
+
+.listitems button.delete-btn {
+    display: none;
+  }
+  
+.listitems:hover button.delete-btn {
+    display: flex;
+    float: right;
+    border: none;
+    color: red;
+    background-color: none;
+  }
