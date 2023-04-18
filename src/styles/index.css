@@ -62,20 +62,20 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-    button[type="submit"] {
-        background-color: #48bfe3;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 18px;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        transition: all 0.2s ease-in-out;
-      }
+button[type="submit"] {
+    background-color: #48bfe3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
       
-      button[type="submit"]:hover {
-        background-color: #64dfdf;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        transform: translateY(-1px);
-      }
+button[type="submit"]:hover {
+background-color: #64dfdf;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+transform: translateY(-1px);
+}
   
