@@ -1,23 +1,27 @@
-import React from "react";
-import {useState} from "react";
+import React, { useState } from "react";
 
+const ToDo = (props) => {
+  const [input, setInput] = useState("");
+  const [listItem, setListItem] = useState([
+    "Make the bed",
+    "Brush my teeth",
+    "Wash my face",
+    "Eat breakfast",
+    "Walk the dog",
+  ]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
+  const addIt = (e) => {
+    if (e.key === "Enter" && input.trim() !== "") {
+      setListItem((prevItems) => [...prevItems, input.trim()]);
+      setInput("");
+    }
+  };
 
-const ToDo = (props)=> {
-    const [input,setInput] = useState ("");
-    const [listItem,setListItem] = useState(["Make the bed","Brush my teeth",
-            "Wash my face", "Eat breakfast","Walk the dog"]);
+  const deleteItem = (index) => {
+    setListItem((prevItems) => prevItems.filter((item, i) => i !== index));
+  };
 
-    const addIt = (e) => {
-        setInput (e.target.value);
-    };
-
-    const deleteItem = (index) => {
-        const newList = [...listItem];
-        newList.splice(index, 1);
-        setListItem(newList);
-      };
-    
   return (
     <div className="list">
       <h1>To-Dos</h1>
@@ -27,21 +31,30 @@ const ToDo = (props)=> {
             type="text"
             placeholder="What needs to be done?"
             value={input}
-            onChange={(e) => addIt(e)}
-          ></input>
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => addIt(e)}
+          />
         </li>
       </ul>
-
       {listItem.map((item, index) => {
         return (
           <ul key={index}>
-            <li className="listitems" onHover={() => deleteItem} onClick ={()=>deleteItem(index)}>
+            <li
+              className="listitems"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
               {item}
-              <button className="delete-btn">X</button>
+              {hoveredIndex === index && (
+                <button className="delete-button" onClick={() => deleteItem(index)}>
+                  X
+                </button>
+              )}
             </li>
           </ul>
         );
       })}
+      <p className="item-count">You have {listItem.length} items on your list.</p>
     </div>
   );
 };
